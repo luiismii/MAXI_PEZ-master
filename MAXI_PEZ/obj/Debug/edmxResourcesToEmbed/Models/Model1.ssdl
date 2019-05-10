@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CLIENTES">
+    <Key>
+      <PropertyRef Name="Id_Cliente" />
+    </Key>
+    <Property Name="Id_Cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Primer_Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Segundo_Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Primer_Apellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="Segundo_Apellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="20" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="10" />
+    <Property Name="Correo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fecha_Nacimiento" Type="date" />
+  </EntityType>
+  <EntityType Name="DEVOLUCIONES">
+    <Key>
+      <PropertyRef Name="Id_Devoluciones" />
+    </Key>
+    <Property Name="Id_Devoluciones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Fecha" Type="date" />
+    <Property Name="Cambio" Type="nvarchar" MaxLength="50" />
+    <Property Name="Id_Factura" Type="int" />
+    <Property Name="Observacion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Id_Producto" Type="int" />
+  </EntityType>
+  <EntityType Name="FACTURAS">
+    <Key>
+      <PropertyRef Name="Id_Factura" />
+    </Key>
+    <Property Name="Id_Factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Venta_Id" Type="int" />
+    <Property Name="Fecha" Type="date" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="10" />
+    <Property Name="RazonSocial" Type="nvarchar" MaxLength="50" />
+    <Property Name="Id_Cliente" Type="int" />
+  </EntityType>
+  <EntityType Name="INVENTARIOS">
+    <Key>
+      <PropertyRef Name="Id_Inventario" />
+    </Key>
+    <Property Name="Id_Inventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Producto" Type="int" />
+    <Property Name="Id_Proveedor" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Fecha" Type="date" />
+  </EntityType>
+  <EntityType Name="PRODUCTOS">
+    <Key>
+      <PropertyRef Name="Id_Producto" />
+    </Key>
+    <Property Name="Id_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_Producto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Precio" Type="money" />
+  </EntityType>
+  <EntityType Name="PROMOCIONES">
+    <Key>
+      <PropertyRef Name="Id_Promociones" />
+    </Key>
+    <Property Name="Id_Promociones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha_Hasta" Type="date" />
+    <Property Name="Descuento" Type="money" />
+  </EntityType>
+  <EntityType Name="PROVEEDOR_PRODUCTO">
+    <Key>
+      <PropertyRef Name="Id_Proveedor" />
+      <PropertyRef Name="Id_Producto" />
+    </Key>
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Valor" Type="money" />
+    <Property Name="Id_Proveedor" Type="int" Nullable="false" />
+    <Property Name="Id_Producto" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PROVEEDORES">
+    <Key>
+      <PropertyRef Name="Id_Proveedor" />
+    </Key>
+    <Property Name="Id_Proveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Primer_Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Segundo_Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Primer_Apellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="Segundo_Apellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="Empresa" Type="nvarchar" MaxLength="50" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="10" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="10" />
+    <Property Name="Correo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fecha_Nacimiento" Type="date" />
+  </EntityType>
+  <EntityType Name="TIPOPAGO">
+    <Key>
+      <PropertyRef Name="Id_Pago" />
+    </Key>
+    <Property Name="Id_Pago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="VENTAS">
+    <Key>
+      <PropertyRef Name="Id_Venta" />
+    </Key>
+    <Property Name="Id_Venta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Produtco" Type="int" />
+    <Property Name="Id_Proveedor" Type="int" />
+    <Property Name="Id_Promociones" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Iva" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Total" Type="money" />
+    <Property Name="Facha" Type="date" />
+    <Property Name="Id_TipoPago" Type="int" />
+  </EntityType>
+  <Association Name="FK_DEVOLUCIONES_FACTURAS">
+    <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="0..1" />
+    <End Role="DEVOLUCIONES" Type="Self.DEVOLUCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACTURAS">
+        <PropertyRef Name="Id_Factura" />
+      </Principal>
+      <Dependent Role="DEVOLUCIONES">
+        <PropertyRef Name="Id_Factura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DEVOLUCIONES_PRODUCTOS">
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="0..1" />
+    <End Role="DEVOLUCIONES" Type="Self.DEVOLUCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOS">
+        <PropertyRef Name="Id_Producto" />
+      </Principal>
+      <Dependent Role="DEVOLUCIONES">
+        <PropertyRef Name="Id_Producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FACTURAS_CLIENTES">
+    <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="0..1" />
+    <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTES">
+        <PropertyRef Name="Id_Cliente" />
+      </Principal>
+      <Dependent Role="FACTURAS">
+        <PropertyRef Name="Id_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FACTURAS_VENTAS">
+    <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="0..1" />
+    <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VENTAS">
+        <PropertyRef Name="Id_Venta" />
+      </Principal>
+      <Dependent Role="FACTURAS">
+        <PropertyRef Name="Venta_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INVENTARIOS_PROVEEDORES">
+    <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="0..1" />
+    <End Role="INVENTARIOS" Type="Self.INVENTARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDORES">
+        <PropertyRef Name="Id_Proveedor" />
+      </Principal>
+      <Dependent Role="INVENTARIOS">
+        <PropertyRef Name="Id_Proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PROVEEDOR_PRODUCTO_PRODUCTOS">
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+    <End Role="PROVEEDOR_PRODUCTO" Type="Self.PROVEEDOR_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOS">
+        <PropertyRef Name="Id_Producto" />
+      </Principal>
+      <Dependent Role="PROVEEDOR_PRODUCTO">
+        <PropertyRef Name="Id_Producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PROVEEDOR_PRODUCTO_PROVEEDORES">
+    <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="1" />
+    <End Role="PROVEEDOR_PRODUCTO" Type="Self.PROVEEDOR_PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDORES">
+        <PropertyRef Name="Id_Proveedor" />
+      </Principal>
+      <Dependent Role="PROVEEDOR_PRODUCTO">
+        <PropertyRef Name="Id_Proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VENTAS_PROMOCIONES">
+    <End Role="PROMOCIONES" Type="Self.PROMOCIONES" Multiplicity="0..1" />
+    <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROMOCIONES">
+        <PropertyRef Name="Id_Promociones" />
+      </Principal>
+      <Dependent Role="VENTAS">
+        <PropertyRef Name="Id_Promociones" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VENTAS_TIPOPAGO">
+    <End Role="TIPOPAGO" Type="Self.TIPOPAGO" Multiplicity="0..1" />
+    <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOPAGO">
+        <PropertyRef Name="Id_Pago" />
+      </Principal>
+      <Dependent Role="VENTAS">
+        <PropertyRef Name="Id_TipoPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DEVOLUCIONES" EntityType="Self.DEVOLUCIONES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACTURAS" EntityType="Self.FACTURAS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVENTARIOS" EntityType="Self.INVENTARIOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROMOCIONES" EntityType="Self.PROMOCIONES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROVEEDOR_PRODUCTO" EntityType="Self.PROVEEDOR_PRODUCTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROVEEDORES" EntityType="Self.PROVEEDORES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIPOPAGO" EntityType="Self.TIPOPAGO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VENTAS" EntityType="Self.VENTAS" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DEVOLUCIONES_FACTURAS" Association="Self.FK_DEVOLUCIONES_FACTURAS">
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+      <End Role="DEVOLUCIONES" EntitySet="DEVOLUCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DEVOLUCIONES_PRODUCTOS" Association="Self.FK_DEVOLUCIONES_PRODUCTOS">
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+      <End Role="DEVOLUCIONES" EntitySet="DEVOLUCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FACTURAS_CLIENTES" Association="Self.FK_FACTURAS_CLIENTES">
+      <End Role="CLIENTES" EntitySet="CLIENTES" />
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FACTURAS_VENTAS" Association="Self.FK_FACTURAS_VENTAS">
+      <End Role="VENTAS" EntitySet="VENTAS" />
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INVENTARIOS_PROVEEDORES" Association="Self.FK_INVENTARIOS_PROVEEDORES">
+      <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+      <End Role="INVENTARIOS" EntitySet="INVENTARIOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PROVEEDOR_PRODUCTO_PRODUCTOS" Association="Self.FK_PROVEEDOR_PRODUCTO_PRODUCTOS">
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+      <End Role="PROVEEDOR_PRODUCTO" EntitySet="PROVEEDOR_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PROVEEDOR_PRODUCTO_PROVEEDORES" Association="Self.FK_PROVEEDOR_PRODUCTO_PROVEEDORES">
+      <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+      <End Role="PROVEEDOR_PRODUCTO" EntitySet="PROVEEDOR_PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VENTAS_PROMOCIONES" Association="Self.FK_VENTAS_PROMOCIONES">
+      <End Role="PROMOCIONES" EntitySet="PROMOCIONES" />
+      <End Role="VENTAS" EntitySet="VENTAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VENTAS_TIPOPAGO" Association="Self.FK_VENTAS_TIPOPAGO">
+      <End Role="TIPOPAGO" EntitySet="TIPOPAGO" />
+      <End Role="VENTAS" EntitySet="VENTAS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

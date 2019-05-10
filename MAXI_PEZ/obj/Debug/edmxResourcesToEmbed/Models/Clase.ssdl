@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="claseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CIUDADES">
+    <Key>
+      <PropertyRef Name="Ciudad_id" />
+    </Key>
+    <Property Name="Ciudad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_Ciudad" Type="nvarchar" MaxLength="50" />
+    <Property Name="Departamento_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="DEPARTAMENTOS">
+    <Key>
+      <PropertyRef Name="departamento_id" />
+    </Key>
+    <Property Name="departamento_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_Departamento" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Pais_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="PAIS">
+    <Key>
+      <PropertyRef Name="Pais_id" />
+    </Key>
+    <Property Name="Pais_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_Pais" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_CIUDADES_DEPARTAMENTOS1">
+    <End Role="DEPARTAMENTOS" Type="Self.DEPARTAMENTOS" Multiplicity="0..1" />
+    <End Role="CIUDADES" Type="Self.CIUDADES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTAMENTOS">
+        <PropertyRef Name="departamento_id" />
+      </Principal>
+      <Dependent Role="CIUDADES">
+        <PropertyRef Name="Departamento_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DEPARTAMENTOS_PAIS1">
+    <End Role="PAIS" Type="Self.PAIS" Multiplicity="0..1" />
+    <End Role="DEPARTAMENTOS" Type="Self.DEPARTAMENTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAIS">
+        <PropertyRef Name="Pais_id" />
+      </Principal>
+      <Dependent Role="DEPARTAMENTOS">
+        <PropertyRef Name="Pais_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="claseModelStoreContainer">
+    <EntitySet Name="CIUDADES" EntityType="Self.CIUDADES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DEPARTAMENTOS" EntityType="Self.DEPARTAMENTOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAIS" EntityType="Self.PAIS" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CIUDADES_DEPARTAMENTOS1" Association="Self.FK_CIUDADES_DEPARTAMENTOS1">
+      <End Role="DEPARTAMENTOS" EntitySet="DEPARTAMENTOS" />
+      <End Role="CIUDADES" EntitySet="CIUDADES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DEPARTAMENTOS_PAIS1" Association="Self.FK_DEPARTAMENTOS_PAIS1">
+      <End Role="PAIS" EntitySet="PAIS" />
+      <End Role="DEPARTAMENTOS" EntitySet="DEPARTAMENTOS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

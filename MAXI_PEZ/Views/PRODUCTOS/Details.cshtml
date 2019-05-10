@@ -1,0 +1,45 @@
+﻿@model MAXI_PEZ.Models.PRODUCTOS
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="container media">
+    <div class="card mx-auto mt-3 col-md-10">
+        <div class="card-header bg-black"><b>Detalles</b></div>
+        <div class="card-body ">
+            <center>
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nombre_Producto)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Nombre_Producto)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Descripcion)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Descripcion)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Precio)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Precio)
+                        </dd>
+                    </dl>
+                </div>
+                <p>
+                    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Producto }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </center>
+        </div>
+    </div>
+</div>

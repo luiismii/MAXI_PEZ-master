@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CALSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="departamentos">
+    <Key>
+      <PropertyRef Name="IdDepartamento" />
+    </Key>
+    <Property Name="IdDepartamento" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idpais" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Departamento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Paises" Relationship="Self.FK_departamentos_Paises" FromRole="departamentos" ToRole="Paises" />
+    <NavigationProperty Name="Municipios" Relationship="Self.FK_Municipios_Departamentos" FromRole="departamentos" ToRole="Municipios" />
+  </EntityType>
+  <EntityType Name="Municipios">
+    <Key>
+      <PropertyRef Name="idMuni" />
+    </Key>
+    <Property Name="idMuni" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="iddepto" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="departamentos" Relationship="Self.FK_Municipios_Departamentos" FromRole="Municipios" ToRole="departamentos" />
+  </EntityType>
+  <EntityType Name="Paises">
+    <Key>
+      <PropertyRef Name="idPais" />
+    </Key>
+    <Property Name="idPais" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Pais" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="departamentos" Relationship="Self.FK_departamentos_Paises" FromRole="Paises" ToRole="departamentos" />
+  </EntityType>
+  <Association Name="FK_departamentos_Paises">
+    <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
+    <End Role="departamentos" Type="Self.departamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paises">
+        <PropertyRef Name="idPais" />
+      </Principal>
+      <Dependent Role="departamentos">
+        <PropertyRef Name="idpais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Municipios_Departamentos">
+    <End Role="departamentos" Type="Self.departamentos" Multiplicity="0..1" />
+    <End Role="Municipios" Type="Self.Municipios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departamentos">
+        <PropertyRef Name="IdDepartamento" />
+      </Principal>
+      <Dependent Role="Municipios">
+        <PropertyRef Name="iddepto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CALSEEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="departamentos" EntityType="Self.departamentos" />
+    <EntitySet Name="Municipios" EntityType="Self.Municipios" />
+    <EntitySet Name="Paises" EntityType="Self.Paises" />
+    <AssociationSet Name="FK_departamentos_Paises" Association="Self.FK_departamentos_Paises">
+      <End Role="Paises" EntitySet="Paises" />
+      <End Role="departamentos" EntitySet="departamentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Municipios_Departamentos" Association="Self.FK_Municipios_Departamentos">
+      <End Role="departamentos" EntitySet="departamentos" />
+      <End Role="Municipios" EntitySet="Municipios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

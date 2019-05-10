@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ebe0913a44f1488ea3a7afeca1384aac" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.CLIENTES" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DEVOLUCIONES" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FACTURAS" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INVENTARIOS" Width="1.5" PointX="10" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PRODUCTOS" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PROMOCIONES" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PROVEEDOR_PRODUCTO" Width="1.5" PointX="10" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PROVEEDORES" Width="1.5" PointX="7.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TIPOPAGO" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.VENTAS" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_FACTURAS_CLIENTES" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_DEVOLUCIONES_FACTURAS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_DEVOLUCIONES_PRODUCTOS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_FACTURAS_VENTAS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_INVENTARIOS_PROVEEDORES" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PROVEEDOR_PRODUCTO_PRODUCTOS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_VENTAS_PROMOCIONES" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_PROVEEDOR_PRODUCTO_PROVEEDORES" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_VENTAS_TIPOPAGO" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

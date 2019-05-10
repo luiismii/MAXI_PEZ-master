@@ -1,0 +1,95 @@
+﻿@model MAXI_PEZ.Models.PROVEEDORES
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container media">
+    <div class="card mx-auto mt-3 col-md-10">
+        <div class="card-header bg-black"><b>Detalles</b></div>
+        <div class="card-body ">
+            <center>
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Primer_Nombre)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Primer_Nombre)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Segundo_Nombre)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Segundo_Nombre)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Primer_Apellido)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Primer_Apellido)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Segundo_Apellido)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Segundo_Apellido)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Empresa)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Empresa)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Direccion)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Direccion)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Telefono)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Telefono)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Correo)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Correo)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Fecha_Nacimiento)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Fecha_Nacimiento)
+                        </dd>
+
+                    </dl>
+                </div>
+                <p>
+                    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Proveedor }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </center>
+        </div>
+    </div>
+</div>
