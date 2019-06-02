@@ -12,7 +12,7 @@
     <Property Name="Direccion" Type="nvarchar" MaxLength="20" />
     <Property Name="Telefono" Type="nvarchar" MaxLength="10" />
     <Property Name="Correo" Type="nvarchar" MaxLength="50" />
-    <Property Name="Fecha_Nacimiento" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fecha_Nacimiento" Type="date" />
   </EntityType>
   <EntityType Name="DEVOLUCIONES">
     <Key>
@@ -20,7 +20,7 @@
     </Key>
     <Property Name="Id_Devoluciones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Cantidad" Type="int" />
-    <Property Name="Fecha" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fecha" Type="date" />
     <Property Name="Cambio" Type="nvarchar" MaxLength="50" />
     <Property Name="Id_Factura" Type="int" />
     <Property Name="Observacion" Type="nvarchar" MaxLength="50" />
@@ -32,7 +32,7 @@
     </Key>
     <Property Name="Id_Factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Venta_Id" Type="int" />
-    <Property Name="Fecha" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fecha" Type="date" />
     <Property Name="Direccion" Type="nvarchar" MaxLength="10" />
     <Property Name="RazonSocial" Type="nvarchar" MaxLength="50" />
     <Property Name="Id_Cliente" Type="int" />
@@ -45,7 +45,7 @@
     <Property Name="Id_Producto" Type="int" />
     <Property Name="Id_Proveedor" Type="int" />
     <Property Name="Cantidad" Type="int" />
-    <Property Name="Fecha" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fecha" Type="date" />
   </EntityType>
   <EntityType Name="PRODUCTOS">
     <Key>
@@ -54,15 +54,15 @@
     <Property Name="Id_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre_Producto" Type="nvarchar" MaxLength="50" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
-    <Property Name="Precio" Type="int" />
+    <Property Name="Precio" Type="money" />
   </EntityType>
   <EntityType Name="PROMOCIONES">
     <Key>
       <PropertyRef Name="Id_Promociones" />
     </Key>
     <Property Name="Id_Promociones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Fecha_Hasta" Type="nvarchar" MaxLength="50" />
-    <Property Name="Descuento" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Fecha_Hasta" Type="date" />
+    <Property Name="Descuento" Type="money" />
   </EntityType>
   <EntityType Name="PROVEEDOR_PRODUCTO">
     <Key>
@@ -70,7 +70,7 @@
       <PropertyRef Name="Id_Producto" />
     </Key>
     <Property Name="Cantidad" Type="int" />
-    <Property Name="Valor" Type="int" />
+    <Property Name="Valor" Type="money" />
     <Property Name="Id_Proveedor" Type="int" Nullable="false" />
     <Property Name="Id_Producto" Type="int" Nullable="false" />
   </EntityType>
@@ -87,7 +87,17 @@
     <Property Name="Direccion" Type="nvarchar" MaxLength="10" />
     <Property Name="Telefono" Type="nvarchar" MaxLength="10" />
     <Property Name="Correo" Type="nvarchar" MaxLength="50" />
-    <Property Name="Fecha_Nacimiento" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fecha_Nacimiento" Type="date" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TIPOPAGO">
     <Key>
@@ -106,8 +116,8 @@
     <Property Name="Id_Promociones" Type="int" />
     <Property Name="Cantidad" Type="int" />
     <Property Name="Iva" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="Total" Type="int" />
-    <Property Name="Facha" Type="nchar" MaxLength="10" />
+    <Property Name="Total" Type="money" />
+    <Property Name="Facha" Type="date" />
     <Property Name="Id_TipoPago" Type="int" />
   </EntityType>
   <Association Name="FK_DEVOLUCIONES_FACTURAS">
@@ -227,6 +237,7 @@
     <EntitySet Name="PROMOCIONES" EntityType="Self.PROMOCIONES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PROVEEDOR_PRODUCTO" EntityType="Self.PROVEEDOR_PRODUCTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PROVEEDORES" EntityType="Self.PROVEEDORES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TIPOPAGO" EntityType="Self.TIPOPAGO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VENTAS" EntityType="Self.VENTAS" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_DEVOLUCIONES_FACTURAS" Association="Self.FK_DEVOLUCIONES_FACTURAS">

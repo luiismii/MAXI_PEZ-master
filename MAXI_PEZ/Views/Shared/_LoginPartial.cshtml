@@ -5,31 +5,37 @@
     {
         @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Hola " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
-        </ul>
+        <div class="btn-group">
+            <button type="button" class="btn btn-danger">@User.Identity.GetUserName()</button>
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu bg-info-gradient">
+                <li class="nav-icon fa fa-edit"><a href="../Manage/ChangePassword">Cambiar Contraceña</a></li>
+                <li role="separator" class="dropdown-divider"></li>
+                <li class="nav-icon fa fa-mobile-phone"><a href="../Manage/AddPhoneNumber">Adicionar Numero Telefonico</a></li>
+                <li role="separator" class="dropdown-divider"></li>
+                <li class="nav-icon fa fa-folder"><a href="../Home/Contact">Contacto</a></li>
+                <li role="separator" class="dropdown-divider"></li>
+                <li class="nav-icon fa fa-heart"><a href="../Home/About">Ayuda</a></li>
+                <li role="separator" class="dropdown-divider"></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a></li>
+            </ul>
+        </div>
+
     }
 }
 else
 {
 
 
-    <ul class="navbar-nav ml-auto">
-
-        <li class="nav-item">
-            <i class="fa fa-sign-in">
-                @Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-            </i>
-            <br/>
-
-            <i class="fa fa-sign-out ">
-                @Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
-            </i>
+    <ul class="navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
         </li>
+        <li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
     </ul>
-                 
+
 
 }

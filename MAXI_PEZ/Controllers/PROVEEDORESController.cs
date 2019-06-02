@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MAXI_PEZ.Models;
+using MAXI_PEZ.App_Data;
 
 namespace MAXI_PEZ.Controllers
 {
     public class PROVEEDORESController : Controller
     {
-        private Entities1 db = new Entities1();
+        private Entities db = new Entities();
 
         // GET: PROVEEDORES
         public async Task<ActionResult> Index()

@@ -1,15 +1,16 @@
-﻿@model IEnumerable<MAXI_PEZ.Models.CLIENTES>
+﻿@model IEnumerable<MAXI_PEZ.App_Data.CLIENTES>
 
 @{
     ViewBag.Title = "Index";
 }
 
+
 <div class="container media">
     <div class="card mx-auto mt-3 col-md-12">
-        <div class="card-header bg-black"><b>Informacion de Productos</b></div>
+        <div class="card-header bg-dark-gradient"><b>Informacion de Clientes</b></div>
         <div class="card-body ">
             <table class="table" border="1">
-                <tr >
+                <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Primer_Nombre)
                     </th>
@@ -65,8 +66,8 @@
                             @Html.DisplayFor(modelItem => item.Fecha_Nacimiento)
                         </td>
                         <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.Id_Cliente }) <br/>
-                            @Html.ActionLink("Detalles", "Details", new { id = item.Id_Cliente }) <br/>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id_Cliente }) <br />
+                            @Html.ActionLink("Detalles", "Details", new { id = item.Id_Cliente }) <br />
                             @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Cliente })
                         </td>
                     </tr>
@@ -84,3 +85,4 @@
         </div>
     </div>
 </div>
+

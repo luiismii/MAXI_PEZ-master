@@ -12,7 +12,7 @@
     <Property Name="Direccion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Fecha_Nacimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
     <NavigationProperty Name="FACTURAS" Relationship="Self.FK_FACTURAS_CLIENTES" FromRole="CLIENTES" ToRole="FACTURAS" />
   </EntityType>
   <EntityType Name="DEVOLUCIONES">
@@ -21,7 +21,7 @@
     </Key>
     <Property Name="Id_Devoluciones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Cantidad" Type="Int32" />
-    <Property Name="Fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
     <Property Name="Cambio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Id_Factura" Type="Int32" />
     <Property Name="Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -35,7 +35,7 @@
     </Key>
     <Property Name="Id_Factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Venta_Id" Type="Int32" />
-    <Property Name="Fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
     <Property Name="Direccion" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="RazonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Id_Cliente" Type="Int32" />
@@ -51,7 +51,7 @@
     <Property Name="Id_Producto" Type="Int32" />
     <Property Name="Id_Proveedor" Type="Int32" />
     <Property Name="Cantidad" Type="Int32" />
-    <Property Name="Fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
     <NavigationProperty Name="PROVEEDORES" Relationship="Self.FK_INVENTARIOS_PROVEEDORES" FromRole="INVENTARIOS" ToRole="PROVEEDORES" />
   </EntityType>
   <EntityType Name="PRODUCTOS">
@@ -61,7 +61,7 @@
     <Property Name="Id_Producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre_Producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Precio" Type="Int32" />
+    <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" />
     <NavigationProperty Name="DEVOLUCIONES" Relationship="Self.FK_DEVOLUCIONES_PRODUCTOS" FromRole="PRODUCTOS" ToRole="DEVOLUCIONES" />
     <NavigationProperty Name="PROVEEDOR_PRODUCTO" Relationship="Self.FK_PROVEEDOR_PRODUCTO_PRODUCTOS" FromRole="PRODUCTOS" ToRole="PROVEEDOR_PRODUCTO" />
   </EntityType>
@@ -70,8 +70,8 @@
       <PropertyRef Name="Id_Promociones" />
     </Key>
     <Property Name="Id_Promociones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Fecha_Hasta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Descuento" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Fecha_Hasta" Type="DateTime" Precision="0" />
+    <Property Name="Descuento" Type="Decimal" Precision="19" Scale="4" />
     <NavigationProperty Name="VENTAS" Relationship="Self.FK_VENTAS_PROMOCIONES" FromRole="PROMOCIONES" ToRole="VENTAS" />
   </EntityType>
   <EntityType Name="PROVEEDOR_PRODUCTO">
@@ -80,7 +80,7 @@
       <PropertyRef Name="Id_Producto" />
     </Key>
     <Property Name="Cantidad" Type="Int32" />
-    <Property Name="Valor" Type="Int32" />
+    <Property Name="Valor" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="Id_Proveedor" Type="Int32" Nullable="false" />
     <Property Name="Id_Producto" Type="Int32" Nullable="false" />
     <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_PROVEEDOR_PRODUCTO_PRODUCTOS" FromRole="PROVEEDOR_PRODUCTO" ToRole="PRODUCTOS" />
@@ -99,9 +99,19 @@
     <Property Name="Direccion" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Fecha_Nacimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
     <NavigationProperty Name="INVENTARIOS" Relationship="Self.FK_INVENTARIOS_PROVEEDORES" FromRole="PROVEEDORES" ToRole="INVENTARIOS" />
     <NavigationProperty Name="PROVEEDOR_PRODUCTO" Relationship="Self.FK_PROVEEDOR_PRODUCTO_PROVEEDORES" FromRole="PROVEEDORES" ToRole="PROVEEDOR_PRODUCTO" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="TIPOPAGO">
     <Key>
@@ -121,8 +131,8 @@
     <Property Name="Id_Promociones" Type="Int32" />
     <Property Name="Cantidad" Type="Int32" />
     <Property Name="Iva" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="Total" Type="Int32" />
-    <Property Name="Facha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Facha" Type="DateTime" Precision="0" />
     <Property Name="Id_TipoPago" Type="Int32" />
     <NavigationProperty Name="FACTURAS" Relationship="Self.FK_FACTURAS_VENTAS" FromRole="VENTAS" ToRole="FACTURAS" />
     <NavigationProperty Name="PROMOCIONES" Relationship="Self.FK_VENTAS_PROMOCIONES" FromRole="VENTAS" ToRole="PROMOCIONES" />
@@ -245,6 +255,7 @@
     <EntitySet Name="PROMOCIONES" EntityType="Self.PROMOCIONES" />
     <EntitySet Name="PROVEEDOR_PRODUCTO" EntityType="Self.PROVEEDOR_PRODUCTO" />
     <EntitySet Name="PROVEEDORES" EntityType="Self.PROVEEDORES" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="TIPOPAGO" EntityType="Self.TIPOPAGO" />
     <EntitySet Name="VENTAS" EntityType="Self.VENTAS" />
     <AssociationSet Name="FK_FACTURAS_CLIENTES" Association="Self.FK_FACTURAS_CLIENTES">
